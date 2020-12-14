@@ -16,7 +16,9 @@ public class WeatherActivity extends AppCompatActivity {
 //        TextView mTextView = (TextView) findViewById(R.id.text_message);
 //        mTextView.setText("Hello world");
         ForecastFragment firstFrag = new ForecastFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.container,firstFrag,null).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.second_layout,firstFrag,null).commit();
+        RelativeFragment firstLayout = new RelativeFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.first_layout,firstLayout,null).commit();
     }
 
     @Override
