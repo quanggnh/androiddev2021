@@ -12,16 +12,34 @@ import android.view.ViewGroup;
 
 
 public class WeatherForecast extends Fragment {
+    private String title;
+    private int page;
+
+    public static Fragment newInstance(int page, String title){
+        Fragment fragment = new Fragment();
+        Bundle args = new Bundle();
+        args.putInt("someint",page);
+        args.putString("somestring",title);
+        fragment.setArguments(args);
+        return fragment;
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        page = getArguments().getInt("someint",0);
+        title = getArguments().getString("sometitle");
+    }
+    public static WeatherForecast newInstance(){
+        Bundle args = new Bundle();
+        WeatherForecast fragment = new WeatherForecast();
+        fragment.setArguments(args);
+        return fragment;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ForecastFragment firstFrag = new ForecastFragment();
-        ft.add(R.id.second_layout,firstFrag,null).commit();
-        RelativeFragment firstLayout = new RelativeFragment();
-        ft.add(R.id.first_layout,firstLayout,null).commit();
+
         View view = inflater.inflate(R.layout.fragment_weather_forecast, container, false);
         return view;
     }

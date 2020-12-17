@@ -1,9 +1,15 @@
 package vn.edu.usth.weather;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
-import android.widget.TextView;
-import android.util.Log;
+import android.widget.Toast;
+
+import com.google.android.material.tabs.TabLayout;
 
 
 public class WeatherActivity extends AppCompatActivity {
@@ -11,48 +17,11 @@ public class WeatherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
-        Log.i("Created","onCreate");
-
-//        TextView mTextView = (TextView) findViewById(R.id.text_message);
-//        mTextView.setText("Hello world");
-        ForecastFragment firstFrag = new ForecastFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.second_layout,firstFrag,null).commit();
-        RelativeFragment firstLayout = new RelativeFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.first_layout,firstLayout,null).commit();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i("Stopped","onStop");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i("Destroyed","onDestroy");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i("Paused","onPause");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i("Resumed","onResume");      }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i("Started","onStart");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.i("Restarted","onRestart");
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab);
+        PagerAdapter adapter = new Adapter(getSupportFragmentManager());
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        tabLayout.setupWithViewPager(pager);
+        pager.setOffscreenPageLimit(3);
+        pager.setAdapter(adapter);
     }
 }
