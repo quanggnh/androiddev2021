@@ -1,12 +1,15 @@
 package vn.edu.usth.weather;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,6 +28,9 @@ public class WeatherForecast extends Fragment {
     }
     @Override
     public void onCreate(Bundle savedInstanceState){
+        MediaPlayer mediaPlayer = MediaPlayer.create(getContext(),R.raw.torch);
+        mediaPlayer.start();
+
         super.onCreate(savedInstanceState);
         page = getArguments().getInt("someint",0);
         title = getArguments().getString("sometitle");

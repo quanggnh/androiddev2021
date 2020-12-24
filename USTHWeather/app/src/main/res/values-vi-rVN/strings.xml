@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">USTH Weather</string>
+    <string name="rain">Mưa</string>
+    <string name="Cloudy">Nhiều mây</string>
+    <string name="Tue">T3</string>
+    <string name="Wed">T4</string>
+    <string name="Thu">T5</string>
+    <string name="Fri">T6</string>
+    <string name="Sat">T7</string>
+    <string name="Sun">CN</string>
+    <string name="Mon">T2</string>
+</resources>

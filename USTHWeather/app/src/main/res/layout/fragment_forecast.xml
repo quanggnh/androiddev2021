@@ -25,7 +25,7 @@
                 android:paddingLeft="4dp"
                 android:layout_marginRight="30dp"
                 android:paddingTop="10dp"
-                android:text = "Mon"
+                android:text = "@string/Mon"
                 android:textSize="15sp"/>
             <ImageView
                 android:layout_width="50dp"
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:layout_weight="1"
-                    android:text = "Cloudy"
+                    android:text = "@string/Cloudy"
                     android:textSize="15sp"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
                 android:paddingLeft="4dp"
                 android:layout_marginRight="30dp"
                 android:paddingTop="10dp"
-                android:text = "Tue"
+                android:text = "@string/Tue"
                 android:textSize="15sp"/>
             <ImageView
                 android:layout_width="50dp"
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:layout_weight="1"
-                    android:text = "Cloudy"
+                    android:text = "@string/Cloudy"
                     android:textSize="15sp"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
                 android:paddingLeft="4dp"
                 android:layout_marginRight="30dp"
                 android:paddingTop="10dp"
-                android:text = "Wed"
+                android:text = "@string/Wed"
                 android:textSize="15sp"/>
             <ImageView
                 android:layout_width="50dp"
@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:layout_weight="1"
-                    android:text = "Cloudy"
+                    android:text = "@string/Cloudy"
                     android:textSize="15sp"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -151,7 +151,7 @@
                 android:paddingLeft="4dp"
                 android:layout_marginRight="30dp"
                 android:paddingTop="10dp"
-                android:text = "Thur"
+                android:text = "@string/Thu"
                 android:textSize="15sp"/>
             <ImageView
                 android:layout_width="50dp"
@@ -169,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:layout_weight="1"
-                    android:text = "Cloudy"
+                    android:text = "@string/Cloudy"
                     android:textSize="15sp"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -193,7 +193,7 @@
                 android:paddingLeft="4dp"
                 android:layout_marginRight="30dp"
                 android:paddingTop="10dp"
-                android:text = "Fri"
+                android:text = "@string/Fri"
                 android:textSize="15sp"/>
             <ImageView
                 android:layout_width="50dp"
@@ -211,7 +211,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:layout_weight="1"
-                    android:text = "Cloudy"
+                    android:text = "@string/Cloudy"
                     android:textSize="15sp"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -235,7 +235,7 @@
                 android:paddingLeft="4dp"
                 android:layout_marginRight="30dp"
                 android:paddingTop="10dp"
-                android:text = "Sat"
+                android:text = "@string/Sat"
                 android:textSize="15sp"/>
             <ImageView
                 android:layout_width="50dp"
@@ -248,13 +248,15 @@
                 android:orientation="vertical"
                 android:layout_height="wrap_content"
                 android:layout_weight="4">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
                     android:layout_weight="1"
-                    android:text = "Cloudy"
-                    android:textSize="15sp"/>
+                    android:paddingLeft="20dp"
+                    android:text="@string/Cloudy"
+                    android:textSize="15sp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -276,7 +278,7 @@
                 android:paddingLeft="4dp"
                 android:layout_marginRight="30dp"
                 android:paddingTop="10dp"
-                android:text = "Sun"
+                android:text = "@string/Sun"
                 android:textSize="15sp"/>
             <ImageView
                 android:layout_width="50dp"
@@ -294,7 +296,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:layout_weight="1"
-                    android:text = "Cloudy"
+                    android:text = "@string/Cloudy"
                     android:textSize="15sp"/>
                 <TextView
                     android:layout_width="wrap_content"
