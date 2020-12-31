@@ -10,6 +10,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -38,9 +41,34 @@ public class WeatherActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        final Handler handler = new Handler(Looper.getMainLooper()){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                String content = msg.getData().getString("server_response");
+                Toast.makeText(getBaseContext(),content,Toast.LENGTH_SHORT).show();
+            }
+        };
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Thread.sleep(5000);
+                }
+                catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+                Bundle bundle = new Bundle();
+                bundle.putString("server_response","some sample JSON here");
+
+                Message msg = new Message();
+                msg.setData(bundle);
+                handler.sendMessage(msg);
+            }
+        });
+
         switch (item.getItemId()) {
             case R.id.action_refresh: {
-                Toast.makeText(getApplicationContext(), "Refreshing", Toast.LENGTH_LONG).show();
+                t.start();
                 return true;
             }
             case R.id.action_setting: {
