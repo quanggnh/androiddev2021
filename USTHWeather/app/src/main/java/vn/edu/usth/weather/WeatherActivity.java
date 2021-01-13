@@ -9,6 +9,8 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,7 +22,7 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabLayout;
 
 
-public class WeatherActivity extends AppCompatActivity {
+    public class WeatherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,43 +43,42 @@ public class WeatherActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        final Handler handler = new Handler(Looper.getMainLooper()){
-            @Override
-            public void handleMessage(@NonNull Message msg) {
-                String content = msg.getData().getString("server_response");
-                Toast.makeText(getBaseContext(),content,Toast.LENGTH_SHORT).show();
-            }
-        };
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    Thread.sleep(5000);
-                }
-                catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-                Bundle bundle = new Bundle();
-                bundle.putString("server_response","some sample JSON here");
+        switch(item.getItemId()){
+            case R.id.action_refresh:
+            {
+                AsyncTask<String, Integer, Bitmap> task = new AsyncTask<String,Integer, Bitmap>(){
+                    @Override
+                    protected void onPreExecute() { }
+                    @Override
+                    protected Bitmap doInBackground(String... strings) {
+                        try{
+                            Thread.sleep(1000);
 
-                Message msg = new Message();
-                msg.setData(bundle);
-                handler.sendMessage(msg);
-            }
-        });
-
-        switch (item.getItemId()) {
-            case R.id.action_refresh: {
-                t.start();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+                    @Override
+                    protected void onProgressUpdate(Integer... values) {
+                        super.onProgressUpdate(values);
+                    }
+                    @Override
+                    protected void onPostExecute(Bitmap bitmap) {
+                        Toast.makeText(getApplicationContext(),"sample goes here",Toast.LENGTH_LONG).show();
+                    }
+                };
+                task.execute("http://ict.usth.edu.vn/wp-content/uploads/usth/usthlogo.png");
                 return true;
             }
-            case R.id.action_setting: {
+            case R.id.action_setting:  {
                 Intent intent = new Intent(this, PrefActivity.class);
                 startActivity(intent);
                 return true;
             }
             default:
-                return super.onOptionsItemSelected(item);
+                super.onOptionsItemSelected(item);
         }
-    }
+        return false;
+        }
 }
