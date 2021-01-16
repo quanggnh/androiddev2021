@@ -8,21 +8,31 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.net.ProtocolException;
+import java.net.URL;
 
-    public class WeatherActivity extends AppCompatActivity {
+
+public class WeatherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,35 +50,45 @@ import com.google.android.material.tabs.TabLayout;
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+    private class task  extends AsyncTask<URL,Void,Bitmap>{
+        Bitmap bitmap;
 
+        @Override
+        protected Bitmap doInBackground(URL... urls) {
+            try{
+                URL url = new URL("https://usth.edu.vn/uploads/chuong-trinh/2017_01/logo-moi_2.png");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setDoInput(true);
+                connection.connect();
+
+                int response = connection.getResponseCode();
+                Log.i("USTH Weather", "The response is: "+response);
+
+                InputStream is = connection.getInputStream();
+                bitmap = BitmapFactory.decodeStream(is);
+
+                connection.disconnect();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            ImageView logo = (ImageView) findViewById(R.id.logo);
+            logo.setImageBitmap(bitmap);
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.action_refresh:
             {
-                AsyncTask<String, Integer, Bitmap> task = new AsyncTask<String,Integer, Bitmap>(){
-                    @Override
-                    protected void onPreExecute() { }
-                    @Override
-                    protected Bitmap doInBackground(String... strings) {
-                        try{
-                            Thread.sleep(1000);
-
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        return null;
-                    }
-                    @Override
-                    protected void onProgressUpdate(Integer... values) {
-                        super.onProgressUpdate(values);
-                    }
-                    @Override
-                    protected void onPostExecute(Bitmap bitmap) {
-                        Toast.makeText(getApplicationContext(),"sample goes here",Toast.LENGTH_LONG).show();
-                    }
-                };
-                task.execute("http://ict.usth.edu.vn/wp-content/uploads/usth/usthlogo.png");
+                new task().execute();
                 return true;
             }
             case R.id.action_setting:  {
